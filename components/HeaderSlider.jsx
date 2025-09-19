@@ -33,7 +33,7 @@ const  HeaderSlider = () => {
     buttonLink1:"/my-orders",
     buttonText2: "Learn More",
     buttonLinkText2:"/about-us",
-    imgSrc: assets.header_macbook_image,
+    imgSrc: assets.Handabag,
    
   },
 ];

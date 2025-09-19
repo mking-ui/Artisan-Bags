@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useAppContext } from "@/context/AppContext";
 import axios from "axios";
 import toast from "react-hot-toast";
+import Loading from "@/components/Loading";
 
 const AddProduct = () => {
 
@@ -16,7 +17,7 @@ const AddProduct = () => {
   const [category, setCategory] = useState('Earphone');
   const [price, setPrice] = useState('');
   const [offerPrice, setOfferPrice] = useState('');
-
+  const [loading, setLoading] = useState(true)
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -42,6 +43,7 @@ const AddProduct = () => {
         setCategory("Earphone");
         setPrice("");
         setOfferPrice ("");
+        setLoading(false)
 
       }else{
         toast.error(data.message)
@@ -160,9 +162,11 @@ const AddProduct = () => {
             />
           </div>
         </div>
+        {loading ? <Loading /> :
         <button type="submit" className="px-8 py-2.5 bg-orange-600 text-white font-medium rounded">
           ADD
         </button>
+       }
       </form>
       {/* <Footer /> */}
     </div>

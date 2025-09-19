@@ -5,6 +5,8 @@ import { useAppContext } from "@/context/AppContext";
 const HomeProducts = () => {
 
   const { products, router } = useAppContext()
+  console.log("Products in HomeProducts:", products);
+
 
   return (
     <div className="flex flex-col items-center pt-14">

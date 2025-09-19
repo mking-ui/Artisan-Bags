@@ -4,11 +4,16 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Image from "next/image";
 import { useState } from "react";
+import { useAppContext } from "@/context/AppContext";
+import toast from "react-hot-toast";
+import axios from "axios";
 
 const AddAddress = () => {
 
+    const {getToken, router} = useAppContext()
+
     const [address, setAddress] = useState({
-        fullName: '',
+        fullname: '',
         phoneNumber: '',
         pincode: '',
         area: '',
@@ -18,6 +23,21 @@ const AddAddress = () => {
 
     const onSubmitHandler = async (e) => {
         e.preventDefault();
+        try {
+            const token = await getToken()
+            const {data}= await axios.post("/api/user/add-address", {address}, {headers: {Authorization: ` Bearer ${token}`}})
+        if(data.success){
+            toast.success(data.message)
+            router.push("/cart")
+        } else{
+            toast.error(data.message)
+        }
+       
+       
+        } catch (error) {
+            toast.error(error.message)
+            
+        }
 
     }
 
@@ -34,7 +54,7 @@ const AddAddress = () => {
                             className="px-2 py-2.5 focus:border-orange-500 transition border border-gray-500/30 rounded outline-none w-full text-gray-500"
                             type="text"
                             placeholder="Full name"
-                            onChange={(e) => setAddress({ ...address, fullName: e.target.value })}
+                            onChange={(e) => setAddress({ ...address, fullname: e.target.value })}
                             value={address.fullName}
                         />
                         <input
