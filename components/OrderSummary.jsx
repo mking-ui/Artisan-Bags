@@ -74,7 +74,6 @@ const OrderSummary = () => {
     if (user) {
       fetchUserAddresses();
     }
-
   }, [user])
 
   return (
