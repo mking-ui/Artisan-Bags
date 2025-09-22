@@ -10,7 +10,7 @@ const Navbar = () => {
 
   return (
     <div className='flex items-center px-4 md:px-8 py-3 justify-between border-b'>
-      <Image onClick={() => router.push('/seller')} className='w-28 lg:w-32 cursor-pointer' src={assets.logo} alt="" />
+      <Image onClick={() => router.push('/')} className='w-28 lg:w-32 cursor-pointer' src={assets.logo} alt="" />
 
       <> <UserButton>
         <UserButton.MenuItems>
