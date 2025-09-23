@@ -80,28 +80,28 @@ const ProductList = () => {
                 </tr>
               </thead>
               <tbody className="text-sm text-gray-500">
-                {products.map((product, index) => (
+                {products?.map((product, index) => (
                   <tr key={index} className="border-t border-gray-500/20">
                     <td className="md:px-4 pl-2 md:pl-4 py-3 flex items-center space-x-3 truncate">
                       <div className="bg-gray-500/10 rounded p-2">
                         <Image
-                          src={product.image[0]}
+                          src={product?.image[0]}
                           alt="product Image"
                           className="w-16"
                           width={1280}
                           height={720}
                         />
                       </div>
-                      <span className="truncate w-full">{product.name}</span>
+                      <span className="truncate w-full">{product?.name}</span>
                     </td>
                     <td className="px-4 py-3 max-sm:hidden">
-                      {product.category}
+                      {product?.category}
                     </td>
-                    <td className="px-4 py-3">${product.offerPrice}</td>
+                    <td className="px-4 py-3">${product?.offerPrice}</td>
                     <td className="px-4 py-3 max-sm:hidden flex gap-2">
                       {/* Visit */}
                       <button
-                        onClick={() => router.push(`/product/${product._id}`)}
+                        onClick={() => router.push(`/product/${product?._id}`)}
                         className="flex items-center gap-1 px-1.5 md:px-3.5 py-2 bg-orange-600 text-white rounded-md"
                       >
                         <span className="hidden md:block">Visit</span>
@@ -116,7 +116,7 @@ const ProductList = () => {
 
                       {/* Delete */}
                       <button
-                        onClick={() => handleDelete(product._id)}
+                        onClick={() => handleDelete(product?._id)}
                         className="px-2 py-1 bg-red-600 text-white rounded-md"
                       >
                         Delete
