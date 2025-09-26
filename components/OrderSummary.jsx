@@ -112,7 +112,7 @@ const OrderSummary = () => {
                     className="px-4 py-2 hover:bg-gray-500/10 cursor-pointer"
                     onClick={() => handleAddressSelect(address)}
                   >
-                    {address.fullName}, {address.area}, {address.city}, {address.state}
+                    {address.fullname}, {address.area}, {address.city}, {address.state}
                   </li>
                 ))}
                 <li
