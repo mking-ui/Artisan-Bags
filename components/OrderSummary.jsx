@@ -37,39 +37,38 @@ const OrderSummary = () => {
     setIsDropdownOpen(false);
   };
 
+ 
+
   const createOrder = async () => {
-    try {
+  if (!selectedAddress) return toast.error("Please select an address");
 
-      if (!selectedAddress) {
-        return toast.error("Please select an address")
-      }
-      let cartItemsArray = Object.keys(cartItems).map((key) => ({ product:key, quantity:cartItems[key]}))
-      cartItemsArray = cartItemsArray.filter(item => item.quantity > 0)
+  const cartItemsArray = Object.keys(cartItems)
+    .map((key) => ({ product: key, quantity: cartItems[key] }))
+    .filter((item) => item.quantity > 0);
 
-      if (cartItemsArray.length === 0) {
-        return toast.error("Cart is empty")
-      }
-      const token = await getToken()
-      const { data } = await axios.post("/api/order/create", {
-        address: selectedAddress._id,
-        items: cartItemsArray
-      },
-        { headers: { Authorization: `Bearer ${token}` } })
-      if (data.success) {
-        toast.success(data.message)
-        setCartItems({})
-        router.push("/order-placed")
-      } else {
-        toast.error(data.message)
-      }
+  if (!cartItemsArray.length) return toast.error("Cart is empty");
 
-    } catch (error) {
-      toast.error(error.message)
+  const amount = getCartAmount() + Math.floor(getCartAmount() * 0.02);
 
+  const token = await getToken();
+  const email = user?.email || user?.primaryEmailAddress?.emailAddress;
+  if (!email) return toast.error("User email not found");
 
-    }
+  try {
+    const { data } = await axios.post(
+      "/api/paystack/init",
+      { email, amount, userId: user._id }, // ✅ send userId here
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+
+    if (!data.status) return toast.error(data.message || "Payment init failed");
+
+    // Redirect user to Paystack payment page
+    window.location.href = data.data.authorization_url;
+  } catch (error) {
+    toast.error(error.message);
   }
-
+};
   useEffect(() => {
     if (user) {
       fetchUserAddresses();

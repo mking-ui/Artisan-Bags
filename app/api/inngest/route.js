@@ -6,7 +6,7 @@ export const { GET, POST, PUT } = serve({
   client: inngest,
   functions: [
     /* your functions will be passed here later! */
-    syncUserCreation,
+    syncUserCreation,  
     syncUserUpdation,
     syncUserDeletion,
     createUserOrder

@@ -8,7 +8,7 @@ import toast from "react-hot-toast";
 
 const AddProduct = () => {
 
-  const {getToken}= useAppContext()
+  const { getToken } = useAppContext()
 
   const [files, setFiles] = useState([]);
   const [name, setName] = useState('');
@@ -25,32 +25,32 @@ const AddProduct = () => {
     formData.append("category", category)
     formData.append("price", price)
     formData.append("offerPrice", offerPrice)
-    
-    for (let i=0; i < files.length; i++){
+
+    for (let i = 0; i < files.length; i++) {
       formData.append("images", files[i])
     }
     try {
-      
-      const token = await getToken(); 
-      const {data}= await axios.post("/api/product/add", formData, {headers:{Authorization: `Bearer ${token}`}}) 
-      if(data.success){
+
+      const token = await getToken();
+      const { data } = await axios.post("/api/product/add", formData, { headers: { Authorization: `Bearer ${token}` } })
+      if (data.success) {
         toast.success(data.message)
         setFiles([]);
         setName("");
         setDescription("");
         setCategory("Earphone");
         setPrice("");
-        setOfferPrice ("");
-  
+        setOfferPrice("");
 
-      }else{
+
+      } else {
         toast.error(data.message)
       }
     } catch (error) {
       toast.error(error.message)
-      
+
     }
-   
+
   };
 
   return (
@@ -122,12 +122,13 @@ const AddProduct = () => {
               onChange={(e) => setCategory(e.target.value)}
               defaultValue={category}
             >
-              <option value="Earphone">Earphone</option>
-              <option value="Headphone">Headphone</option>
-              <option value="Watch">Watch</option>
-              <option value="Smartphone">Smartphone</option>
-              <option value="Laptop">Laptop</option>
-              <option value="Camera">Camera</option>
+              <option value="Canvas Tote">Canvas Tote</option>
+              <option value="Leather Tote">Leather Tote</option>
+              <option value="Mini Tote">Mini Tote</option>
+              <option value="Oversized Tote">Oversized Tote</option>
+              <option value="Printed Tote">Printed Tote</option>
+              <option value="Eco-Friendly Tote">Eco-Friendly Tote</option>
+              <option value="Designer Tote">Designer Tote</option>
               <option value="Accessories">Accessories</option>
             </select>
           </div>
@@ -160,11 +161,11 @@ const AddProduct = () => {
             />
           </div>
         </div>
-      
+
         <button type="submit" className="px-8 py-2.5 bg-orange-600 text-white font-medium rounded">
           ADD
         </button>
-  
+
       </form>
       {/* <Footer /> */}
     </div>
