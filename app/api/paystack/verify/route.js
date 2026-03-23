@@ -48,7 +48,7 @@ export async function GET(req) {
       data: {
         userId: user._id,
         items: cartItemsArray,
-        address: user.addresses[0]?._id || null,
+        address: data.data.metadata.address ?? user.addresses[0] ?? {},
         amount,
         date: Date.now(),
       },

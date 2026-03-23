@@ -16,8 +16,12 @@ const AddProduct = () => {
   const [category, setCategory] = useState('Earphone');
   const [price, setPrice] = useState('');
   const [offerPrice, setOfferPrice] = useState('');
+  const [loading, setLoading] = useState(false);
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (loading) return; // prevent double click
+
+    setLoading(true);
 
     const formData = new FormData()
     formData.append("name", name)
@@ -50,6 +54,10 @@ const AddProduct = () => {
       toast.error(error.message)
 
     }
+
+    setLoading(false);
+
+
 
   };
 
@@ -162,8 +170,13 @@ const AddProduct = () => {
           </div>
         </div>
 
-        <button type="submit" className="px-8 py-2.5 bg-orange-600 text-white font-medium rounded">
-          ADD
+        <button
+          type="submit"
+          disabled={loading}
+          className={`px-8 py-2.5 text-white font-medium rounded transition
+  ${loading ? "bg-gray-400 cursor-not-allowed" : "bg-orange-600 hover:bg-orange-700"}`}
+        >
+          {loading ? "Adding Product..." : "ADD"}
         </button>
 
       </form>

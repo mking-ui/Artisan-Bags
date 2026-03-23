@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 
 export async function POST(request) {
   try {
-    const { email, amount, userId } = await request.json(); // ✅ include userId
+   const { email, amount, userId, address } = await request.json(); // ✅ include userId
 
     const res = await fetch("https://api.paystack.co/transaction/initialize", {
       method: "POST",
@@ -13,8 +13,8 @@ export async function POST(request) {
       body: JSON.stringify({
         email,
         amount: amount * 100, // amount in kobo
-        callback_url: `${process.env.NEXT_PUBLIC_APP_URL}/payment/callback`,
-        metadata: { userId }, // ✅ attach userId for later verification
+        callback_url: `${process.env.NEXT_PUBLIC_APP_URL}/payment`,
+        metadata: { userId, address }, // ✅ attach userId for later verification
       }),
     });
 

@@ -108,14 +108,14 @@ const Orders = () => {
                   {/* Extra Info */}
                   <div>
                     <p className="flex flex-col">
-                      <span>Method : COD</span>
+                       <span>Method : Paystack</span>
                       <span>
                         Date :{" "}
                         {order?.date
                           ? new Date(order.date).toLocaleDateString()
                           : "N/A"}
                       </span>
-                      <span>Payment : Pending</span>
+                      <span>Payment : Paid</span>
                     </p>
                   </div>
                 </div>
